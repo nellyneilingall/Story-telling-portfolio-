@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neil Ingall — Artist. Creative. Film Maker.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a08;
+    --off-white: #f4f1eb;
+    --cream: #e8e3d9;
+    --red: #c8341a;
+    --warm-gray: #8c8880;
+    --mid: #3a3832;
+    --gold: #b89a5a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--off-white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--warm-gray);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--off-white); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: 0.03em;
+    color: var(--off-white);
+    margin-bottom: 1rem;
+  }
+
+  .hero-name span { color: var(--red); }
+
+  .hero-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--cream);
+    margin-bottom: 2.5rem;
+    line-height: 1.4;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-meta a {
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-meta a:hover { color: var(--gold); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated film-strip visual */
+  .film-strip {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0.35;
+  }
+
+  .strip-row {
+    flex: 1;
+    display: flex;
+    animation: slideLeft 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .strip-row:nth-child(even) {
+    animation: slideRight 25s linear infinite;
+  }
+
+  .strip-cell {
+    flex-shrink: 0;
+    width: 120px;
+    height: 100%;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .strip-cell.dark { background: rgba(0,0,0,0.3); }
+  .strip-cell.accent { background: rgba(200,52,26,0.1); color: var(--red); }
+
+  @keyframes slideLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes slideRight {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 3;
+    width: 110px;
+    height: 110px;
+    border: 1px solid rgba(184,154,90,0.4);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.2rem;
+    background: rgba(10,10,8,0.6);
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-badge .badge-top {
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .hero-badge .badge-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--off-white);
+    line-height: 1.1;
+  }
+
+  .hero-badge .badge-sub {
+    font-size: 0.5rem;
+    color: var(--warm-gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 3rem; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    max-width: 80px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(244,241,235,0.75);
+    margin-bottom: 1.2rem;
+  }
+
+  .about-aside {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 3rem;
+  }
+
+  .tag-group {
+    margin-bottom: 2.5rem;
+  }
+
+  .tag-group-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.75rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--off-white);
+    background: transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .tag:hover { border-color: var(--gold); color: var(--gold); }
+  .tag.gold { border-color: rgba(184,154,90,0.5); color: var(--gold); }
+
+  /* ── EXPERIENCE ── */
+  .experience { background: #0e0d0b; }
+
+  .exp-grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .exp-item:hover { background: rgba(255,255,255,0.02); }
+  .exp-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+
+  .exp-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    padding-top: 0.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .exp-role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    color: var(--off-white);
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-company {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(244,241,235,0.65);
+  }
+
+  .exp-desc li {
+    list-style: none;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-desc li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-size: 0.7rem;
+  }
+
+  /* ── PROJECTS ── */
+  .projects { background: var(--black); }
+
+  .projects-intro {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(244,241,235,0.6);
+    max-width: 600px;
+    margin-bottom: 4rem;
+    line-height: 1.6;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .project-card {
+    background: var(--black);
+    padding: 1.75rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--red);
+    transition: height 0.3s;
+  }
+
+  .project-card:hover::before { height: 100%; }
+  .project-card:hover { background: #0e0d0b; }
+
+  .project-type {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.6rem;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--off-white);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .project-meta {
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-desc {
+    font-size: 0.82rem;
+    color: rgba(244,241,235,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── CLIENTS ── */
+  .clients { background: #0e0d0b; }
+
+  .clients-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .client-category {
+    margin-bottom: 1.5rem;
+  }
+
+  .client-category-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .client-category-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(184,154,90,0.2);
+  }
+
+  .client-names {
+    font-size: 0.82rem;
+    color: rgba(244,241,235,0.55);
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── AWARDS ── */
+  .awards { background: var(--black); }
+
+  .award-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1rem;
+    max-width: 680px;
+    transition: border-color 0.2s;
+  }
+
+  .award-block:hover { border-color: rgba(184,154,90,0.3); }
+
+  .award-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 3rem;
+    text-align: center;
+  }
+
+  .award-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: var(--off-white);
+  }
+
+  .award-body {
+    font-size: 0.85rem;
+    color: rgba(244,241,235,0.55);
+    line-height: 1.6;
+  }
+
+  /* ── EDUCATION ── */
+  .education { background: #0e0d0b; }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .edu-card {
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+  }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--warm-gray);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .edu-school {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    color: var(--off-white);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-degree {
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .edu-notes {
+    font-size: 0.8rem;
+    color: rgba(244,241,235,0.5);
+    line-height: 1.65;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-headline span { color: var(--red); }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--off-white);
+    transition: color 0.2s;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .contact-link:hover { color: var(--gold); }
+
+  .contact-link-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  .contact-link-value {
+    font-size: 0.9rem;
+  }
+
+  /* ── PERSONALITY ── */
+  .personality-strip {
+    background: #0e0d0b;
+    padding: 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .personality-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2rem;
+  }
+
+  .personality-item {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(244,241,235,0.35);
+    transition: color 0.2s;
+    cursor: default;
+  }
+
+  .personality-item:hover { color: var(--off-white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  footer .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    color: rgba(244,241,235,0.3);
+  }
+
+  footer .footer-note {
+    font-size: 0.72rem;
+    color: rgba(244,241,235,0.25);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-aside { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding-left: 0; padding-top: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .clients-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Neil Ingall</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Hackney, London — Available for Commissions</p>
+    <h1 class="hero-name">Neil<br><span>Ingall</span></h1>
+    <p class="hero-tagline">Artist. Creative. Film Maker.<br>20+ years of stories worth telling.</p>
+    <div class="hero-meta">
+      <span>+44 7446 076 223</span>
+      <a href="mailto:neilingallfilms@gmail.com">neilingallfilms@gmail.com</a>
+      <a href="https://www.instagram.com/neilingall" target="_blank">@neilingall</a>
+      <a href="https://www.linkedin.com/in/neil.ingall" target="_blank">linkedin.com/in/neil.ingall</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="film-strip" aria-hidden="true">
+      <div class="strip-row">
+        <div class="strip-cell">DIRECTOR</div><div class="strip-cell dark"></div><div class="strip-cell">BAFTA</div><div class="strip-cell accent">✦</div><div class="strip-cell">WRITER</div><div class="strip-cell dark"></div><div class="strip-cell">PRODUCER</div><div class="strip-cell">DIRECTOR</div><div class="strip-cell dark"></div><div class="strip-cell">BAFTA</div><div class="strip-cell accent">✦</div><div class="strip-cell">WRITER</div><div class="strip-cell dark"></div><div class="strip-cell">PRODUCER</div>
+      </div>
+      <div class="strip-row">
+        <div class="strip-cell dark"></div><div class="strip-cell">HACKNEY</div><div class="strip-cell">E9</div><div class="strip-cell dark"></div><div class="strip-cell accent">RSA</div><div class="strip-cell">FILM</div><div class="strip-cell dark"></div><div class="strip-cell">HACKNEY</div><div class="strip-cell">E9</div><div class="strip-cell dark"></div><div class="strip-cell accent">RSA</div><div class="strip-cell">FILM</div><div class="strip-cell dark"></div>
+      </div>
+      <div class="strip-row">
+        <div class="strip-cell accent">✦</div><div class="strip-cell">SXSW</div><div class="strip-cell dark"></div><div class="strip-cell">PODCAST</div><div class="strip-cell">CREATIVE</div><div class="strip-cell dark"></div><div class="strip-cell accent">✦</div><div class="strip-cell">SXSW</div><div class="strip-cell dark"></div><div class="strip-cell">PODCAST</div><div class="strip-cell">CREATIVE</div><div class="strip-cell dark"></div><div class="strip-cell accent">✦</div>
+      </div>
+      <div class="strip-row">
+        <div class="strip-cell">ANALOG</div><div class="strip-cell dark"></div><div class="strip-cell accent">THRILLER</div><div class="strip-cell">ART</div><div class="strip-cell dark"></div><div class="strip-cell">COMEDY</div><div class="strip-cell">ANALOG</div><div class="strip-cell dark"></div><div class="strip-cell accent">THRILLER</div><div class="strip-cell">ART</div><div class="strip-cell dark"></div><div class="strip-cell">COMEDY</div>
+      </div>
+      <div class="strip-row">
+        <div class="strip-cell dark"></div><div class="strip-cell">FASHION</div><div class="strip-cell accent">✦</div><div class="strip-cell">SKATE</div><div class="strip-cell dark"></div><div class="strip-cell">VOGUE</div><div class="strip-cell">FASHION</div><div class="strip-cell accent">✦</div><div class="strip-cell">SKATE</div><div class="strip-cell dark"></div><div class="strip-cell">VOGUE</div><div class="strip-cell accent">✦</div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <span class="badge-top">BAFTA</span>
+      <span class="badge-main">AWARD<br>WINNER</span>
+      <span class="badge-sub">The Craftsman</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <p class="section-label">About</p>
+    <h2 class="section-title">A Creative<br>with Range</h2>
+  </div>
+  <div class="about-body reveal">
+    <p>I've worked in arts, music, film, and TV for over 20 years — delivering creative projects of all sizes, from large commercial works to smaller passion projects. I'm equally comfortable developing ideas from inception to completion, or joining a production mid-flow.</p>
+    <p>Through years embedded in wheeled sports communities across London, Europe, and North America, I've built connections across a rich tapestry of subcultures: contemporary arts, photography, fashion, LGBTQI+ communities, skate culture. These communities shape how I see the world — and what I want to make.</p>
+    <p>My current focus is on developing ideas that can inspire positive change and raise awareness.</p>
+
+    <div class="about-aside" style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2.5rem; border-left: none; padding-left: 0;">
+      <div class="tag-group">
+        <p class="tag-group-label">Skills</p>
+        <div class="tags">
+          <span class="tag">End-to-end production</span>
+          <span class="tag">Conceptual thinking</span>
+          <span class="tag">Adobe Creative Suite</span>
+          <span class="tag">DaVinci Resolve</span>
+          <span class="tag">Script development</span>
+          <span class="tag">Pitching & Decks</span>
+          <span class="tag">Scripted & Unscripted</span>
+          <span class="tag">Character development</span>
+          <span class="tag">Directing on & off set</span>
+          <span class="tag">Working with actors</span>
+          <span class="tag">Podcasts & Online</span>
+          <span class="tag">AI Tools</span>
+          <span class="tag">Mentoring creatives</span>
+        </div>
+      </div>
+      <div class="tag-group">
+        <p class="tag-group-label">Also</p>
+        <div class="tags">
+          <span class="tag gold">BAFTA Award Winner</span>
+          <span class="tag gold">RSA Featured Artist</span>
+          <span class="tag">Semi-retired pro rollerblader</span>
+          <span class="tag">Improvisational dancer</span>
+          <span class="tag">Tarot reader</span>
+          <span class="tag">Father to Yuna</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <p class="section-label">Experience</p>
+  <h2 class="section-title">Career</h2>
+  <div class="exp-grid">
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2023 – 2024</div>
+      <div>
+        <p class="exp-role">Studio Supervisor</p>
+        <p class="exp-company">MKII Studio</p>
+        <ul class="exp-desc">
+          <li>Managing the studio in-house on productions and events.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2022 – 2023</div>
+      <div>
+        <p class="exp-role">Development Researcher</p>
+        <p class="exp-company">Misfits Entertainment, Soho</p>
+        <ul class="exp-desc">
+          <li>Creative development, funding applications, script writing, concept artwork.</li>
+          <li>Pitches, pitch deck layouts, developmental writing and treatments.</li>
+          <li>Executive producers Ian Bonhôte and Lizzie Gillet.</li>
+          <li>Worked across 20+ feature documentary, scripted, and TV projects.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2019 – Present</div>
+      <div>
+        <p class="exp-role">Podcast Producer / Co-Creator</p>
+        <p class="exp-company">The Magical World of Mud</p>
+        <ul class="exp-desc">
+          <li>Written and co-edited a 10-episode comedy podcast series.</li>
+          <li>Featuring comedian Kev Mud — finalist for British Comedian of the Year 2022.</li>
+          <li>Series 2 currently in editing phase.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2019 (Jan–Jul)</div>
+      <div>
+        <p class="exp-role">Director / AD</p>
+        <p class="exp-company">I,Dog — Amazon Prime</p>
+        <ul class="exp-desc">
+          <li>Development, producer, and assistant director.</li>
+          <li>Pilot mini series for Amazon Prime starring Hannah Spearitt (S-Club 7).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2017 – 2023</div>
+      <div>
+        <p class="exp-role">Creator / Director</p>
+        <p class="exp-company">Wonders of the World: Gustbabden</p>
+        <ul class="exp-desc">
+          <li>Creator, Director, Writer, Producer of an experimental art film series.</li>
+          <li>Dark comedy — coining a new genre: 'Analog Thriller'.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2009 – 2019</div>
+      <div>
+        <p class="exp-role">Studio Director</p>
+        <p class="exp-company">Medium Space Studios, Hackney Wick</p>
+        <ul class="exp-desc">
+          <li>Led artist studios and gallery space in Hackney Wick for a decade.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2012 – 2014</div>
+      <div>
+        <p class="exp-role">Creator / Director</p>
+        <p class="exp-company">The Craftsman — iPad Cinematic Experience</p>
+        <ul class="exp-desc">
+          <li>Creator, Writer, Audio-Visual Director and UX content creator.</li>
+          <li>40 mins of in-game video drama across 5 days of gameplay.</li>
+          <li>Based on BAFTA/RSA award-winning short film. Presented at SXSW and Warner Brothers Boot Camp.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2011 – 2015</div>
+      <div>
+        <p class="exp-role">Creative Director</p>
+        <p class="exp-company">Little Yellow Jacket, London / LA</p>
+        <ul class="exp-desc">
+          <li>End-to-end video production for fashion, e-commerce, editorial & moving image.</li>
+          <li>Clients: GQ, Men's Health, British Vogue, Harper's Bazaar, i-D, Dazed & Confused, Burberry, Alexander McQueen, ASOS, Selfridges, Net-a-Porter, London Fashion Week, and more.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2009 – 2011</div>
+      <div>
+        <p class="exp-role">Junior Producer</p>
+        <p class="exp-company">Rattling Stick, London</p>
+        <ul class="exp-desc">
+          <li>TV advertising agency under Ringan Ledwidge and Daniel Kleinman.</li>
+          <li>Clients: W+K, Ogilvy, BBH, Saatchi & Saatchi, Unilever, Coca-Cola, Nike, McDonald's, British Airways, Volkswagen, Diageo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-dates">2008 – 2009</div>
+      <div>
+        <p class="exp-role">Runner</p>
+        <p class="exp-company">Homecorp, London</p>
+        <ul class="exp-desc">
+          <li>Beauty commercials agency under Sara Dunlop and Stuart Bentham.</li>
+          <li>Clients: L'Oréal, Estée Lauder, Revlon, Fenty Beauty, Charlotte Tilbury, Clinique, Lush.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <p class="section-label">Development Projects</p>
+  <h2 class="section-title">Selected Works</h2>
+  <p class="projects-intro">A selection of feature documentary, scripted, and TV projects developed at Misfits Entertainment and beyond — spanning climate, culture, sport, and human stories.</p>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Rise</p>
+      <p class="project-meta">Dir. Sandra Winter · Prod. Darren Aronofsky</p>
+      <p class="project-desc">Climate feature documentary.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Munroe Rising</p>
+      <p class="project-meta">Dir. Olivia Cappuccini · Co-Universal Pictures</p>
+      <p class="project-desc">Feature documentary co-produced with Universal Pictures.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Climate Series / TV</p>
+      <p class="project-title">Biopiracy</p>
+      <p class="project-meta">Dir. Louis Wellecan (Lil Black Swan) · Prod. Aurelen Bonzon</p>
+      <p class="project-desc">Climate-focused TV series.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Superman: The Christopher Reeve Story</p>
+      <p class="project-meta">Dirs. Ian Bonhôte & Peter Ettedgui · Co-Passion Pictures</p>
+      <p class="project-desc">Words + Pictures collaboration.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">The Contestant</p>
+      <p class="project-meta">Dir. Clair Titley</p>
+      <p class="project-desc"></p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Series / TV</p>
+      <p class="project-title">Kingdom of Dreams</p>
+      <p class="project-meta">Paramount / Fremantle</p>
+      <p class="project-desc">Dirs. Ian Bonhôte & Peter Ettedgui.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Black in Fashion</p>
+      <p class="project-meta">Dir. Cynthia Erivo · Co-Edith's Daughter / MRC</p>
+      <p class="project-desc">Feature series on race and fashion.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">McQueen</p>
+      <p class="project-meta">Dirs. Ian Bonhôte & Peter Ettedgui</p>
+      <p class="project-desc"></p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Rising Phoenix</p>
+      <p class="project-meta">Dirs. Ian Bonhôte & Peter Ettedgui</p>
+      <p class="project-desc">Paralympic Games documentary.</p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Who the F*!k is Leni Sinclair!?</p>
+      <p class="project-meta">Created by Leni Sinclair & Oren Goldenberg</p>
+      <p class="project-desc"></p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Feature Documentary</p>
+      <p class="project-title">Hijabis United</p>
+      <p class="project-meta">Dir/Prod. Erin Sayder</p>
+      <p class="project-desc"></p>
+    </div>
+
+    <div class="project-card reveal">
+      <p class="project-type">Film / TV Scripted</p>
+      <p class="project-title">I, Monster</p>
+      <p class="project-meta">Prod/Writer Andee Ryder</p>
+      <p class="project-desc"></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <p class="section-label">Collaborators</p>
+  <h2 class="section-title">Clients &amp;<br>Partners</h2>
+  <div class="clients-grid">
+    <div>
+      <div class="client-category">
+        <p class="client-category-label">Fashion &amp; Editorial</p>
+        <p class="client-names">British Vogue · Harper's Bazaar · i-D Magazine · Dazed & Confused · The Gentlewoman · AnOther Magazine · Tatler · Vogue Italia · GQ · Men's Health · House of Holland · Burberry · Alexander McQueen · Topshop · ASOS · Selfridges · Net-a-Porter · London Fashion Week · Savile Row Tailors · Fashion East · Kering</p>
+      </div>
+      <div class="client-category">
+        <p class="client-category-label">Advertising</p>
+        <p class="client-names">Wieden+Kennedy · Ogilvy · BBH · Saatchi & Saatchi · DDB London · McCann London · Leo Burnett London · JWT · VCCP · Mother London</p>
+      </div>
+    </div>
+    <div>
+      <div class="client-category">
+        <p class="client-category-label">Brands</p>
+        <p class="client-names">Unilever · Procter & Gamble · Coca-Cola · McDonald's · Volkswagen · British Airways · Sky · BT Group · Tesco · ASDA · Samsung · Nike · Diageo · Nestlé · Santander · Barclays · Lloyds Banking Group</p>
+      </div>
+      <div class="client-category">
+        <p class="client-category-label">Beauty</p>
+        <p class="client-names">L'Oréal · Estée Lauder · Revlon · Avon · Fenty Beauty · Charlotte Tilbury · Benefit Cosmetics · Clinique · No7 · The Body Shop · Huda Beauty · Burt's Bees · Nivea · Lush</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards" id="awards">
+  <p class="section-label">Recognition</p>
+  <h2 class="section-title">Awards</h2>
+  <div class="reveal">
+    <div class="award-block">
+      <div class="award-icon">🏆</div>
+      <div>
+        <p class="award-title">BAFTA Award Winner</p>
+        <p class="award-body">Director of the BAFTA award-winning short film <em>The Craftsman</em>, produced in collaboration with Ridley Scott's Associates &amp; BLACKDOG. The project was also presented at SXSW and the Warner Brothers Boot Camp, and later extended into a 40-minute interactive cinematic iPad experience.</p>
+      </div>
+    </div>
+    <div class="award-block">
+      <div class="award-icon">🎨</div>
+      <div>
+        <p class="award-title">RSA Featured Artist</p>
+        <p class="award-body">Selected as a featured artist at the Royal Society of Arts exhibition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <p class="section-label">Education</p>
+  <h2 class="section-title">Training</h2>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <p class="edu-year">2006 – 2008</p>
+      <p class="edu-school">Manchester School of Art</p>
+      <p class="edu-degree">BA (Hons) Textile Design for Fashion — First Class</p>
+      <p class="edu-notes">Year 2 exchange programme at HK Polytechnic, Hong Kong. Student ambassador. Focus on conceptual film studies and printmaking with water-soluble materials.</p>
+    </div>
+    <div class="edu-card reveal">
+      <p class="edu-year">2004 – 2005</p>
+      <p class="edu-school">East Surrey College</p>
+      <p class="edu-degree">Foundation Diploma in Art &amp; Design</p>
+      <p class="edu-notes">Broad foundation across fine art, design, and visual communication disciplines.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONALITY STRIP -->
+<div class="personality-strip">
+  <div class="personality-items">
+    <span class="personality-item">Father to Yuna</span>
+    <span class="personality-item">·</span>
+    <span class="personality-item">Semi-retired pro rollerblader</span>
+    <span class="personality-item">·</span>
+    <span class="personality-item">Self-taught yogi</span>
+    <span class="personality-item">·</span>
+    <span class="personality-item">Improvisational dancer</span>
+    <span class="personality-item">·</span>
+    <span class="personality-item">Tarot reader</span>
+    <span class="personality-item">·</span>
+    <span class="personality-item">Focused</span>
+    <span class="personality-item">·</span>
+    <span class="personality-item">Playful</span>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-headline">Let's Make<br>Something<br><span>Real.</span></h2>
+      <p style="color: rgba(244,241,235,0.5); font-size: 0.88rem; line-height: 1.7; max-width: 420px;">Available for commissions, collaborations, and creative partnerships across film, TV, documentary, podcast, and beyond.</p>
+    </div>
+    <div class="contact-links reveal">
+      <a class="contact-link" href="tel:+447446076223">
+        <span class="contact-link-label">Phone</span>
+        <span class="contact-link-value">+44 7446 076 223</span>
+      </a>
+      <a class="contact-link" href="mailto:neilingallfilms@gmail.com">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">neilingallfilms@gmail.com</span>
+      </a>
+      <a class="contact-link" href="https://www.instagram.com/neilingall" target="_blank">
+        <span class="contact-link-label">Instagram</span>
+        <span class="contact-link-value">@neilingall</span>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/neil.ingall" target="_blank">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">neil.ingall</span>
+      </a>
+      <a class="contact-link" href="https://indd.adobe.com/view/90237813-a489-4873-8994-d928adcd4c61" target="_blank">
+        <span class="contact-link-label">Portfolio</span>
+        <span class="contact-link-value">View on Adobe InDesign →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Neil Ingall</span>
+  <span class="footer-note">Hackney, E9 · Artist · Creative · Film Maker</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
